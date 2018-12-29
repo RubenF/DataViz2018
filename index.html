@@ -1,200 +1,668 @@
 <!DOCTYPE html>
-<html lang="en">
+<meta charset="utf-8">
+<title>DataViz 2018</title>
 
-  <head>
+<!-- // El style va aca: @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700); -->
+<style>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
 
-    <title>DataViz 2018</title>
+body {
+  font-family: "Montserrat";
+  margin: 30px auto;
+  width: 1060px;
+  min-height: 2000px;
+}
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> 
-    <!-- Custom styles for this template -->
-    <link href="css/scrolling-nav.css" rel="stylesheet">
+#body {
+  position: relative;
+}
 
-  </head>
+footer {
+  padding: 2em 0 1em 0;
+  font-size: 12px;
+}
 
-  <body id="page-top">
+h1 {
+  font-size: 90px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">DataViz 2018</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#about">Selectores</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#services">Visalización</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#contact">Contacto</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+h1 + h2 {
+  margin-top: 0;
+}
 
-    <header class="p-7 mb-2 bg-dark text-white">  <!-- header class="bg-primary text-white" -->
-      <div class="container text-center">
-        <h1>¿Cómo se construye un hit musical mundial?</h1>
-        <h1></h1>
-        <img  src="img/spotify.jpg"  width="450" height="200" alt="Tabla Demosytrativa" />
-        <p class="lead"></p>
-      </div>
-    </header>
+h2 {
+  font-weight: 400;
+  font-size: 24px;
+  margin-bottom: 10;
+}
 
-    <section id="about">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
-            <h2>Selectores</h2>
-            <p class="lead">This is a great place to talk about your webpage. This template is purposefully unstyled so you can use it as a boilerplate or starting point for you own landing page designs! This template features:</p>
-          </div>
-    
-   
-        <div class="row">
+h1, h2 {
+  font-family: "Montserrat";
+  text-rendering: optimizeLegibility;
+}
 
-          
-            <div class="col">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Seleccionar Variable</h5>
-                        <p class="card-text">Some quick example text to build on the card title</p>
-                        <a href="#" class="card-link">link</a>
-                    </div>
-                </div>
-            </div>
+#body > p {
+  line-height: 1.5em;
+  width: 640px;
+  text-rendering: optimizeLegibility;
+}
 
-            <div class="col">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Seleccionar Rango</h5>
-                        <p class="card-text">Some quick example text to build on the card title</p>
-                        <a href="#" class="card-link">link</a>
-                    </div>
-                </div>
-            </div>
+#charts {
+  padding: 10px 0;
+}
 
-            <div class="col">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Seleccionar Región</h5>
-                        <p class="card-text">Some quick example text to build on the card title</p>
-                        <a href="#" class="card-link">link</a>
-                    </div>
-                </div>
-            </div>
+.chart {
+  display: inline-block;
+  height: 150px;
+  padding: 15px;
+    border: 1px solid rgb(43, 119, 7);      
+  margin-bottom: 10px;
+}
+
+.reset {
+  padding-left: 1em;
+  font-size: smaller;
+  color: #ccc;
+}
+
+.background.bar {
+  fill: #ccc;
+}
+
+.foreground.bar {
+  fill: rgb(64, 153, 23);
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.brush rect.extent {
+  fill: steelblue;
+  fill-opacity: .125;
+}
+
+.brush .resize path {
+  fill: #eee;
+  stroke: #666;
+}
+
+#energy-chart {
+  width: 230px;
+}
+
+#danceability-chart {
+  width: 260px;
+}
+
+#loudness-chart {
+  width: 230px;
+}
+
+#key-chart {
+  width: 230px;
+}
+
+#speech-chart {
+  width: 260px;
+}
+
+#acou-chart {
+  width: 230px;
+}
+
+#duracion-chart {
+  width: 1150px;
+}
+
+#streamworld-chart {
+  width: 1150px;
+  border: 1px solid rgb(119, 14, 7);
+}
+
+#flight-list {
+  min-height: 1024px;
+}
+
+#flight-list .date,
+#flight-list .day {
+  margin-bottom: .4em;
+}
+
+#flight-list .flight {
+  line-height: 1.5em;
+  background: #eee;
+  width: 640px;
+  margin-bottom: 1px;
+}
+
+#flight-list .time {
+  color: #999;
+}
+
+#flight-list .flight div {
+  display: inline-block;
+  width: 100px;
+}
+
+#flight-list div.distance,
+#flight-list div.delay {
+  width: 160px;
+  padding-right: 10px;
+  text-align: right;
+}
+
+#flight-list .early {
+  color: green;
+}
+
+aside {
+  position: absolute;
+  left: 740px;
+  font-size: smaller;
+  width: 220px;
+}
+
+</style>
 
 
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <section id="services" class="bg-light">
-      <div class="container">
-    
-    
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
-            <h2>Visualización</h2>
-            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut optio velit inventore, expedita quo laboriosam possimus ea consequatur vitae, doloribus consequuntur ex. Nemo assumenda laborum vel, labore ut velit dignissimos.</p>
-          </div>
-
-     
-        </div>
-        <div class="row">
-
-          <div class="col">
-              <div class="card">
-                  <div class="card-body text-center">
-                      <h5 class="card-title">Viz1</h5>
-                      <p class="card-text">Some quick example text to build on the card title</p>
-                      <a href="#" class="card-link">link</a>
-                  </div>
-              </div>
-          </div>
 
 
-          <div class="col">
-              <div class="card">
-                  <div class="card-body text-center">
-                      <h5 class="card-title">Viz1b</h5>
-                      <p class="card-text">Some quick example text to build on the card title</p>
-                      <a href="#" class="card-link">link</a>
-                  </div>
-              </div>
-          </div>
+
+<div id="body">
+
+<a href="http://datamining.dc.uba.ar/datamining/"><img src="spotify.jpg" width="122" height="50"></a>
+
+<h1>Spotify DataViz</h1>
+
+<h2>Universidad de Buenos Aires</h2>
+<h2>Maestría en Explotación de Datos y Descubrimiento del Conocimiento</h2>
 
 
-          <div class="col">
-              <div class="card">
-                  <div class="card-body text-center">
-                      <h5 class="card-title">Viz3</h5>
-                      <p class="card-text">Some quick example text to build on the card title</p>
-                      <a href="#" class="card-link">link</a>
-                  </div>
-              </div>
-          </div>
+
+<div id="charts">
+  <div id="energy-chart" class="chart">
+    <div class="title">ENERGY</div>
+  </div>
+  <div id="danceability-chart" class="chart">
+    <div class="title">DANCEABILITY</div>
+  </div>
+  <div id="loudness-chart" class="chart">
+    <div class="title">LOUDNESS</div>
+  </div>
+  <div id="key-chart" class="chart">
+      <div class="title">KEY</div>
+  </div>
+  <div id="speech-chart" class="chart">
+      <div class="title">SPEECHNESS</div>
+  </div>
+  <div id="acou-chart" class="chart">
+      <div class="title">ACOUSTICNESS</div>
+  </div>
+  <div id="duracion-chart" class="chart">
+    <div class="title">DURACIÓN</div>
+  </div>
+  <div id="duracion-chart" class="chart">
+      <div class="title">STREAMS WORLDWIDE</div>
+  </div>
+
+</div>
 
 
-          <div class="col">
-              <div class="card">
-                  <div class="card-body text-center">
-                      <h5 class="card-title">Viz4</h5>
-                      <p class="card-text">Some quick example text to build on the card title</p>
-                      <a href="#" class="card-link">link</a>
-                  </div>
-              </div>
-          </div>
+<div id="lists">
+  <div id="flight-list" class="list"></div>
+</div>
+
+<footer>
+  <span style="float:right;">
+    Released under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License 2.0</a>.
+  </span>
+  Copyright 2018 <a href="http://datamining.dc.uba.ar/datamining/">Universidad De Buenos Aires.</a>
+</footer>
+
+</div>
 
 
 
 
+<script src="crossfilter.v1.min.js"></script>
+<script src="d3.v3.min.js"></script>
 
-      </div>
-    </section>
 
-    <section id="contact">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
-            <h2>Contact us</h2>
-            <p class="lead">Ing. Rubén Flecha</p><a href="mailto:ruben.flecha@gmail.com">ruben.flecha@gmail.com </a> 
-            <div class="card mb-4"></div> 
-            <p class="lead">Lic. Federico Cubells</p><a href="mailto:jfcubells@gmail.com">jfcubells@gmail.com</a> 
-          </div>
-        </div>
-      </div>
-    </section>
+<script>
 
-    <!-- Footer -->
-    <footer class="py-5 bg-dark">
-      <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Universidad de Buenos Aires - Maestría en Explotación de Datos y Descubrimiento del Conocimiento 2018</p>
-      </div>
-      <!-- /.container -->
-    </footer>
+// (It's CSV, but GitHub Pages only gzip's JSON at the moment.)
+d3.csv("Data/ranking_mundial_dummies3.csv", function(error, flights) {
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  // Various formatters.
+  var formatNumber = d3.format(",d"),
+      formatChange = d3.format("+,d"),
+      formatDate = d3.time.format("%B %d, %Y"),
+      formatTime = d3.time.format("%I:%M %p");
 
-    <!-- Plugin JavaScript -->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  // A nest operator, for grouping the flight list.
+  var nestByDate = d3.nest()
+      .key(function(d) { return d3.time.day(d.date); });
 
-    <!-- Custom JavaScript for this theme -->
-    <script src="js/scrolling-nav.js"></script>
+  // A little coercion, since the CSV is untyped.
+  flights.forEach(function(d, i) {
 
-  </body>
+    d.index = i;
+    d.Worldwide_TOP_10 = +d.Worldwide_TOP_10;
+    d.Worldwide_TOP_11_50 = +d.Worldwide_TOP_11_50;
+    d.Worldwide_TOP_51_100 = +d.Worldwide_TOP_51_100;
+    d.danceability = +d.danceability*10;
+    d.distance = +d.distance;
+    d.energy = +d.energy;
+    d.loudness = +d.loudness;
+    d.speachness = +d.speachness;
+    d.acousticness = +d.acousticness*100;
+    d.energy = +d.energy;
+    d.key = +d.key;
+    d.duration_seg = + d.duration_seg;
+    d.Streams_Worldwide = +d.Streams_Worldwide/1000000;
+    d.Streams_LATAM = +d.Streams_LATAM;
+    d.Streams_EUROPE = +d.Streams_EUROPE;
+    d.Streams_ASIA = +d.Streams_ASIA;
+    d.Streams_OCEANIA = +d.Streams_OCEANIA;
+    d.Streams_NORTH_AMERICA = +d.Streams_NORTH_AMERICA;
 
-</html>
+
+  });
+
+  // Create the crossfilter for the relevant dimensions and groups.
+  var flight = crossfilter(flights),
+      all = flight.groupAll(),
+
+
+      date = flight.dimension(function(d) { return d.duration_seg; }),                 
+      dates = date.group(function(d) {return Math.floor(d);}),
+
+      hour = flight.dimension(function(d) { return d.energy; }),    
+      hours = hour.group(Math.floor),
+  
+      delay = flight.dimension(function(d) { return  d.danceability; }),      
+      delays = delay.group(Math.floor),
+
+      distance = flight.dimension(function(d) { return Math.min(0, d.loudness); }),                  
+      distances = distance.group(function(d) { return Math.floor(d) ; });
+
+      key = flight.dimension(function(d) { return Math.max(0, d.key); }),                  
+      keys = key.group(function(d) { return Math.floor(d) ; });
+
+      speech = flight.dimension(function(d) { return Math.max(0, d.speachness); }),                  
+      speechs = key.group( Math.floor),
+
+      acou = flight.dimension(function(d) { return Math.max(0, d.acousticness); }),                
+      acous = acou.group(function(d) { return Math.floor(d) ; });
+
+      sworld = flight.dimension(function(d) { return Math.max(0, d.Streams_Worldwide); }),                  
+      sworlds = sworld.group(function(d) { return Math.floor(d) ; });
+
+  var charts = [
+
+
+
+    barChart()
+        .dimension(key)
+       .group(keys)
+      .x(d3.scale.linear()
+        .domain([0, 14])
+        .rangeRound([0, 10 * 14])),
+
+    barChart()
+        .dimension(delay)
+        .group(delays)
+      .x(d3.scale.linear()
+        .domain([0, 10])
+        .rangeRound([0, 10 * 21])),
+
+    barChart()
+        .dimension(distance)
+        .group(distances)
+      .x(d3.scale.linear()
+        .domain([-12, 0])
+        .rangeRound([-12, 10 * 14])),
+
+    barChart()
+        .dimension(key)
+       .group(keys)
+     .x(d3.scale.linear()
+       .domain([0, 12])
+       .rangeRound([0, 10 * 16])),
+        
+     barChart()
+        .dimension(speech)
+        .group(speechs)
+        .x(d3.scale.linear()
+        .domain([0, 15])
+        .rangeRound([0, 10 * 15])),
+
+     barChart()
+        .dimension(acou)
+        .group(acous)
+        .x(d3.scale.linear()
+        .domain([0, 50])
+        .rangeRound([0, 10 * 20])),
+
+
+    barChart()
+        .dimension(date)
+        .group(dates)
+
+        .x(d3.scale.linear()
+        .domain([160, 350])
+        .rangeRound([0, 10 * 110])),
+
+
+
+
+       barChart()
+        .dimension(sworld)
+        .group(sworlds)
+        .x(d3.scale.linear()
+        .domain([0, 1600])
+        .rangeRound([0, 10 * 110]))
+
+  ];
+
+  // Given our array of charts, which we assume are in the same order as the
+  // .chart elements in the DOM, bind the charts to the DOM and render them.
+  // We also listen to the chart's brush events to update the display.
+
+  var chart = d3.selectAll(".chart")
+      .data(charts)
+      .each(function(chart) { chart.on("brush", renderAll).on("brushend", renderAll); });
+
+  // Render the initial lists.
+  var list = d3.selectAll(".list")
+      .data([flightList]);
+
+  // Render the total.
+  d3.selectAll("#total")
+      .text(formatNumber(flight.size()));
+
+  renderAll();
+
+  // Renders the specified chart or list.
+  function render(method) {
+    d3.select(this).call(method);
+  }
+
+  // Whenever the brush moves, re-rendering everything.
+  function renderAll() {
+    chart.each(render);
+    list.each(render);
+    d3.select("#active").text(formatNumber(all.value()));
+  }
+
+  // Like d3.time.format, but faster.
+  function parseDate(d) {
+    return new Date(2001,
+        d.substring(0, 2) - 1,
+        d.substring(2, 4),
+        d.substring(4, 6),
+        d.substring(6, 8));
+  }
+
+  window.filter = function(filters) {
+    filters.forEach(function(d, i) { charts[i].filter(d); });
+    renderAll();
+  };
+
+  window.reset = function(i) {
+    charts[i].filter(null);
+    renderAll();
+  };
+
+  function flightList(div) {
+    var flightsByDate = nestByDate.entries(date.top(40));
+
+    div.each(function() {
+      var date = d3.select(this).selectAll(".date")
+          .data(flightsByDate, function(d) { return d.key; });
+
+      date.enter().append("div")
+          .attr("class", "date")
+        .append("div")
+          .attr("class", "day")
+          .text(function(d) { return formatDate(d.values[0].date); });
+
+      date.exit().remove();
+
+      var flight = date.order().selectAll(".flight")
+          .data(function(d) { return d.values; }, function(d) { return d.index; });
+
+      var flightEnter = flight.enter().append("div")
+          .attr("class", "flight");
+
+      flightEnter.append("div")
+          .attr("class", "time")
+          .text(function(d) { return formatTime(d.date); });
+
+      flightEnter.append("div")
+          .attr("class", "origin")
+          .text(function(d) { return d.origin; });
+
+      flightEnter.append("div")
+          .attr("class", "destination")
+          .text(function(d) { return d.destination; });
+
+      flightEnter.append("div")
+          .attr("class", "distance")
+          .text(function(d) { return formatNumber(d.distance) + " mi."; });
+
+      flightEnter.append("div")
+          .attr("class", "delay")
+          .classed("early", function(d) { return d.delay < 0; })
+          .text(function(d) { return formatChange(d.delay) + " min."; });
+
+      flight.exit().remove();
+
+      flight.order();
+    });
+  }
+
+  function barChart() {
+    if (!barChart.id) barChart.id = 0;
+
+    var margin = {top: 10, right: 10, bottom: 20, left: 10},
+        x,
+        y = d3.scale.linear().range([100, 0]),
+        id = barChart.id++,
+        axis = d3.svg.axis().orient("bottom"),
+        brush = d3.svg.brush(),
+        brushDirty,
+        dimension,
+        group,
+        round;
+
+    function chart(div) {
+      var width = x.range()[1],
+          height = y.range()[0];
+
+      y.domain([0, group.top(1)[0].value]);
+
+      div.each(function() {
+        var div = d3.select(this),
+            g = div.select("g");
+
+        // Create the skeletal chart.
+        if (g.empty()) {
+          div.select(".title").append("a")
+              .attr("href", "javascript:reset(" + id + ")")
+              .attr("class", "reset")
+              .text("reseteo")
+              .style("display", "none");
+
+          g = div.append("svg")
+              .attr("width", width + margin.left + margin.right)
+              .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+              .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+          g.append("clipPath")
+              .attr("id", "clip-" + id)
+            .append("rect")
+              .attr("width", width)
+              .attr("height", height);
+
+          g.selectAll(".bar")
+              .data(["background", "foreground"])
+            .enter().append("path")
+              .attr("class", function(d) { return d + " bar"; })
+              .datum(group.all());
+
+          g.selectAll(".foreground.bar")
+              .attr("clip-path", "url(#clip-" + id + ")");
+
+          g.append("g")
+              .attr("class", "axis")
+              .attr("transform", "translate(0," + height + ")")
+              .call(axis);
+
+          // Initialize the brush component with pretty resize handles.
+          var gBrush = g.append("g").attr("class", "brush").call(brush);
+          gBrush.selectAll("rect").attr("height", height);
+          gBrush.selectAll(".resize").append("path").attr("d", resizePath);
+        }
+
+        // Only redraw the brush if set externally.
+        if (brushDirty) {
+          brushDirty = false;
+          g.selectAll(".brush").call(brush);
+          div.select(".title a").style("display", brush.empty() ? "none" : null);
+          if (brush.empty()) {
+            g.selectAll("#clip-" + id + " rect")
+                .attr("x", 0)
+                .attr("width", width);
+          } else {
+            var extent = brush.extent();
+            g.selectAll("#clip-" + id + " rect")
+                .attr("x", x(extent[0]))
+                .attr("width", x(extent[1]) - x(extent[0]));
+          }
+        }
+
+        g.selectAll(".bar").attr("d", barPath);
+      });
+
+      function barPath(groups) {
+        var path = [],
+            i = -1,
+            n = groups.length,
+            d;
+        while (++i < n) {
+          d = groups[i];
+          path.push("M", x(d.key), ",", height, "V", y(d.value), "h9V", height);
+        }
+        return path.join("");
+      }
+
+      function resizePath(d) {
+        var e = +(d == "e"),
+            x = e ? 1 : -1,
+            y = height / 3;
+        return "M" + (.5 * x) + "," + y
+            + "A6,6 0 0 " + e + " " + (6.5 * x) + "," + (y + 6)
+            + "V" + (2 * y - 6)
+            + "A6,6 0 0 " + e + " " + (.5 * x) + "," + (2 * y)
+            + "Z"
+            + "M" + (2.5 * x) + "," + (y + 8)
+            + "V" + (2 * y - 8)
+            + "M" + (4.5 * x) + "," + (y + 8)
+            + "V" + (2 * y - 8);
+      }
+    }
+
+    brush.on("brushstart.chart", function() {
+      var div = d3.select(this.parentNode.parentNode.parentNode);
+      div.select(".title a").style("display", null);
+    });
+
+    brush.on("brush.chart", function() {
+      var g = d3.select(this.parentNode),
+          extent = brush.extent();
+      if (round) g.select(".brush")
+          .call(brush.extent(extent = extent.map(round)))
+        .selectAll(".resize")
+          .style("display", null);
+      g.select("#clip-" + id + " rect")
+          .attr("x", x(extent[0]))
+          .attr("width", x(extent[1]) - x(extent[0]));
+      dimension.filterRange(extent);
+    });
+
+    brush.on("brushend.chart", function() {
+      if (brush.empty()) {
+        var div = d3.select(this.parentNode.parentNode.parentNode);
+        div.select(".title a").style("display", "none");
+        div.select("#clip-" + id + " rect").attr("x", null).attr("width", "100%");
+        dimension.filterAll();
+      }
+    });
+
+    chart.margin = function(_) {
+      if (!arguments.length) return margin;
+      margin = _;
+      return chart;
+    };
+
+    chart.x = function(_) {
+      if (!arguments.length) return x;
+      x = _;
+      axis.scale(x);
+      brush.x(x);
+      return chart;
+    };
+
+    chart.y = function(_) {
+      if (!arguments.length) return y;
+      y = _;
+      return chart;
+    };
+
+    chart.dimension = function(_) {
+      if (!arguments.length) return dimension;
+      dimension = _;
+      return chart;
+    };
+
+    chart.filter = function(_) {
+      if (_) {
+        brush.extent(_);
+        dimension.filterRange(_);
+      } else {
+        brush.clear();
+        dimension.filterAll();
+      }
+      brushDirty = true;
+      return chart;
+    };
+
+    chart.group = function(_) {
+      if (!arguments.length) return group;
+      group = _;
+      return chart;
+    };
+
+    chart.round = function(_) {
+      if (!arguments.length) return round;
+      round = _;
+      return chart;
+    };
+
+    return d3.rebind(chart, brush, "on");
+  }
+});
+
+</script>
